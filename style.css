@@ -3,7 +3,19 @@
   --bg-color: #f9f9f9;
   --card-bg: #ffffff;
   --text-color: #333;
+  --input-bg: #ffffff;
+  --input-border: #ddd;
+  --placeholder-color: #999;
   --border-radius: 8px;
+}
+
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --card-bg: #1e1e1e;
+  --text-color: #f1f1f1;
+  --input-bg: #2d2d2d;
+  --input-border: #444;
+  --placeholder-color: #666;
 }
 
 body {
@@ -15,6 +27,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
@@ -25,7 +38,37 @@ body {
   width: 100%;
   max-width: 600px;
   text-align: center;
+  position: relative;
+  transition: background-color 0.3s;
 }
+
+.theme-switch-wrapper {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.theme-toggle-btn {
+  background: none;
+  border: 1px solid var(--input-border);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.theme-toggle-btn:hover {
+  background-color: rgba(128, 128, 128, 0.1);
+}
+
+.icon-moon { display: none; }
+[data-theme="dark"] .icon-sun { display: none; }
+[data-theme="dark"] .icon-moon { display: inline-block; }
 
 h1 {
   margin-top: 0;
@@ -34,7 +77,8 @@ h1 {
 }
 
 p {
-  color: #666;
+  color: var(--text-color);
+  opacity: 0.8;
   margin-bottom: 1.5rem;
 }
 
@@ -47,17 +91,20 @@ p {
 input[type="text"] {
   flex: 1;
   padding: 0.75rem;
-  border: 1px solid #ddd;
+  border: 1px solid var(--input-border);
+  background-color: var(--input-bg);
+  color: var(--text-color);
   border-radius: var(--border-radius);
   outline: none;
   font-size: 1rem;
+  transition: background-color 0.3s, border-color 0.3s;
 }
 
 input[type="text"]:focus {
   border-color: var(--primary-color);
 }
 
-button {
+button#get-thumbnail {
   padding: 0.75rem 1.5rem;
   background-color: var(--primary-color);
   color: white;
@@ -68,7 +115,7 @@ button {
   transition: opacity 0.2s;
 }
 
-button:hover {
+button#get-thumbnail:hover {
   opacity: 0.9;
 }
 
@@ -79,9 +126,10 @@ button:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 2px dashed #eee;
+  border: 2px dashed var(--input-border);
   border-radius: var(--border-radius);
   padding: 1rem;
+  transition: border-color 0.3s;
 }
 
 .thumbnail-image {
@@ -99,5 +147,5 @@ button:hover {
 }
 
 .placeholder-text {
-  color: #999;
+  color: var(--placeholder-color);
 }
