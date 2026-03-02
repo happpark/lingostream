@@ -1,21 +1,23 @@
 :root {
   --primary-color: #ff0000;
-  --bg-color: #f9f9f9;
-  --card-bg: #ffffff;
-  --text-color: #333;
+  --bg-color: #ffffff; /* 순백색으로 변경 */
+  --card-bg: #f8f9fa; /* 카드는 아주 연한 회색 */
+  --text-color: #212529;
   --input-bg: #ffffff;
-  --input-border: #ddd;
-  --placeholder-color: #999;
-  --border-radius: 8px;
+  --input-border: #ced4da;
+  --placeholder-color: #adb5bd;
+  --border-radius: 12px;
+  color-scheme: light; /* 브라우저에 라이트 모드임을 알림 */
 }
 
 [data-theme="dark"] {
-  --bg-color: #121212;
-  --card-bg: #1e1e1e;
-  --text-color: #f1f1f1;
-  --input-bg: #2d2d2d;
-  --input-border: #444;
-  --placeholder-color: #666;
+  --bg-color: #000000; /* 완전 검정 */
+  --card-bg: #1a1a1a; /* 짙은 회색 카드 */
+  --text-color: #f8f9fa;
+  --input-bg: #2b2b2b;
+  --input-border: #444444;
+  --placeholder-color: #6c757d;
+  color-scheme: dark; /* 브라우저에 다크 모드임을 알림 */
 }
 
 body {
@@ -27,43 +29,48 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
   background-color: var(--card-bg);
-  padding: 2rem;
+  padding: 2.5rem;
   border-radius: var(--border-radius);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   width: 100%;
-  max-width: 600px;
+  max-width: 550px;
   text-align: center;
   position: relative;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme="dark"] .container {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .theme-switch-wrapper {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 1.5rem;
+  right: 1.5rem;
 }
 
 .theme-toggle-btn {
-  background: none;
+  background: var(--input-bg);
   border: 1px solid var(--input-border);
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1.2rem;
-  transition: background-color 0.3s, border-color 0.3s;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .theme-toggle-btn:hover {
-  background-color: rgba(128, 128, 128, 0.1);
+  transform: scale(1.1);
 }
 
 .icon-moon { display: none; }
@@ -72,78 +79,90 @@ body {
 
 h1 {
   margin-top: 0;
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 p {
   color: var(--text-color);
-  opacity: 0.8;
-  margin-bottom: 1.5rem;
+  opacity: 0.7;
+  margin-bottom: 2rem;
 }
 
 .input-group {
   display: flex;
-  gap: 10px;
-  margin-bottom: 1.5rem;
+  gap: 12px;
+  margin-bottom: 2rem;
 }
 
 input[type="text"] {
   flex: 1;
-  padding: 0.75rem;
-  border: 1px solid var(--input-border);
+  padding: 0.8rem 1rem;
+  border: 2px solid var(--input-border);
   background-color: var(--input-bg);
   color: var(--text-color);
   border-radius: var(--border-radius);
   outline: none;
   font-size: 1rem;
-  transition: background-color 0.3s, border-color 0.3s;
+  transition: all 0.3s ease;
 }
 
 input[type="text"]:focus {
   border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(255, 0, 0, 0.1);
 }
 
 button#get-thumbnail {
-  padding: 0.75rem 1.5rem;
+  padding: 0.8rem 1.5rem;
   background-color: var(--primary-color);
   color: white;
   border: none;
   border-radius: var(--border-radius);
   font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: all 0.3s ease;
 }
 
 button#get-thumbnail:hover {
-  opacity: 0.9;
+  filter: brightness(1.1);
+  transform: translateY(-1px);
 }
 
 .thumbnail-container {
   margin-top: 1rem;
-  min-height: 200px;
+  min-height: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   border: 2px dashed var(--input-border);
   border-radius: var(--border-radius);
-  padding: 1rem;
-  transition: border-color 0.3s;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
 }
 
 .thumbnail-image {
   max-width: 100%;
-  border-radius: var(--border-radius);
-  margin-bottom: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .download-btn {
   display: inline-block;
-  margin-top: 10px;
   color: var(--primary-color);
   text-decoration: none;
   font-weight: 600;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--primary-color);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.download-btn:hover {
+  background-color: var(--primary-color);
+  color: white;
 }
 
 .placeholder-text {
